@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Course;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -39,4 +40,10 @@ Route::get('admin/adminStudents', function () {
     $users = User::where('permission', 3)->get();
 
     return view('admin/adminStudents', compact('users'));
+});
+
+Route::get('admin/adminClasses', function () {
+    $courses = Course::all();
+
+    return view('admin/adminClasses', compact('courses'));
 });
