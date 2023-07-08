@@ -34,3 +34,9 @@ Route::get('admin/adminTeachers', function () {
 
     return view('admin/adminTeachers', compact('users'));
 });
+
+Route::get('admin/adminStudents', function () {
+    $users = User::where('permission', 3)->get();
+
+    return view('admin/adminStudents', compact('users'));
+});
