@@ -16,8 +16,15 @@
                             {{ session('status') }}
                         </div>
                         @endif
-    
-                        <table class="table table-striped table-bordered">
+                        @if (session('Correct'))
+                        <div class="alert alert-success">{{ session('Correct') }}</div>
+                        @endif
+                        
+                        @if (session('Incorrect'))
+                        <div class="alert alert-danger">{{ session('Incorrect') }}</div>
+                        @endif
+                        <div class="table-responsive">
+                          <table class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -27,7 +34,7 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="table-group-divider">
                                 @foreach($users as $user)
                                 <tr>
                                     <td>{{$user->id}}</td>
@@ -77,16 +84,16 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="" method="POST">
+                                                    <form action="{{ route('userPermissions.update') }}" method="POST">
                                                         @csrf
                                                         <div>
                                                             <div class="mb-3" hidden>
                                                                 <label for="exampleInputEmail1"
                                                                     class="form-label">ID</label>
-                                                                <input name="adminPermissionID" type="email"
+                                                                <input name="adminPermissionID" type="hidden"
                                                                     class="form-control" id="exampleInputEmail1"
                                                                     aria-describedby="emailHelp" value="{{$user->id}}"
-                                                                    disabled />
+                                                                    readonly />
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="exampleInputEmail1"
@@ -94,22 +101,22 @@
                                                                 <input name="adminPermissionEmail" type="email"
                                                                     class="form-control" id="exampleInputEmail1"
                                                                     aria-describedby="emailHelp" value="{{$user->email}}"
-                                                                    disabled />
+                                                                    readonly />
                                                             </div>
                                                             <div class="my-3">
                                                                 <label for="adminPermissionPermission">Permissions</label>
                                                                 <select name="adminPermissionPermission" class="form-select"
                                                                     aria-label="Default select example">
-                                                                    <option @if($user->permission == 0)
+                                                                    <option value="0" @if($user->permission == 0)
                                                                         selected
                                                                         @endif>No Role</option>
-                                                                    <option @if($user->permission == 1)
+                                                                    <option value="1" @if($user->permission == 1)
                                                                         selected
                                                                         @endif>Admin</option>
-                                                                    <option @if($user->permission == 2)
+                                                                    <option value="2" @if($user->permission == 2)
                                                                         selected
                                                                         @endif>Teacher</option>
-                                                                    <option @if($user->permission == 3)
+                                                                    <option value="3" @if($user->permission == 3)
                                                                         selected
                                                                         @endif>Student</option>
                                                                 </select>
@@ -117,19 +124,16 @@
                                                             <div class="my-3">
                                                                 <label for="adminPermissionStatus">Status</label>
                                                                 <div class="form-check form-switch">
-                                                                    <input name="adminPermissionStatus"
-                                                                        class="form-check-input" type="checkbox"
-                                                                        role="switch" id="flexSwitchCheckDefault"
-                                                                        @if($user->status == 1)
-                                                                    checked
-                                                                    @endif>
-                                                                    <label class="form-check-label"
-                                                                        for="flexSwitchCheckDefault">Active</label>
+                                                                    <input name="adminPermissionStatus" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                                                                        @if($user->status == 1) checked @endif value="1">
+                                                                    <label class="form-check-label" for="flexSwitchCheckDefault">Active</label>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="d-flex">
-                                                            <input type="submit" class="btn btn-success" value="Accept" />
+                                                            <button type="submit" class="btn btn-success">
+                                                                Confirm
+                                                            </button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -139,7 +143,9 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                        </table>
+                        </table>  
+                        </div>
+                        
                     </div>
                 </div>
             </div>
