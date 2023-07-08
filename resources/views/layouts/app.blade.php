@@ -38,6 +38,18 @@
                             <ul class="navbar-nav me-auto">
                                 @guest
                                 @else
+                                @if(Auth::user()->permission == 0)
+                                <li>
+                                    <span
+                                        style="display: inline-block; width:1px; height:90%; background:#000; margin: 0 2px;"></span>
+                                </li>
+                                <li class="my-auto px-3">
+                                    <p class="m-auto">NO ROLE ASSIGNED</p>
+                                </li>
+                                <li>
+                                    <span style="display: inline-block; width:1px; height:90%; background:#000; margin: 0 2px;"></span>
+                                </li>
+                                @endif
                                 @if(Auth::user()->permission == 1)
                                 <li>
                                     <span
