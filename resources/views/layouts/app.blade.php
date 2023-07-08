@@ -62,16 +62,16 @@
                                     <span style="display: inline-block; width:1px; height:90%; background:#000; margin: 0 2px;"></span>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link">Permissions</a>
+                                    <a href="{{ url('/admin/adminPermissions') }}" class="nav-link">Permissions</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link">Teachers</a>
+                                    <a href="{{ url('/admin/adminTeachers') }}" class="nav-link">Teachers</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link">Students</a>
+                                    <a href="{{ url('/admin/adminStudents') }}" class="nav-link">Students</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link">Classes</a>
+                                    <a href="{{ url('/admin/adminClasses') }}" class="nav-link">Classes</a>
                                 </li>
                                 @endif
                                 @if(Auth::user()->permission == 2)
@@ -86,7 +86,7 @@
                                     <span style="display: inline-block; width:1px; height:90%; background:#000; margin: 0 2px;"></span>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link">Students</a>
+                                    <a href="{{ url('/teacher/teacherStudents') }}" class="nav-link">Students</a>
                                 </li>
                                 @endif
                                 @if(Auth::user()->permission == 3)
@@ -101,10 +101,10 @@
                                     <span style="display: inline-block; width:1px; height:90%; background:#000; margin: 0 2px;"></span>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link">Score</a>
+                                    <a href="{{ url('/student/studentScore') }}" class="nav-link">Score</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link">Classes</a>
+                                    <a href="{{ url('/student/studentClasses') }}" class="nav-link">Classes</a>
                                 </li>
                                 @endif
                                 @endguest

@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('admin/adminPermissions', function () {
+    $users = User::all();
+
+    return view('admin/adminPermissions', compact('users'));
+});
+
+Route::get('admin/adminTeachers', function () {
+    $users = User::where('permission', 2)->get();
+
+    return view('admin/adminTeachers', compact('users'));
+});
