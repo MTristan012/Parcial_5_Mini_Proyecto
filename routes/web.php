@@ -42,11 +42,17 @@ Route::post('admin/adminPermissions', [UserController::class, "update"])->name("
 
 /* Admin Teachers Routes */
 
+// Read
+
 Route::get('admin/adminTeachers', function () {
     $users = User::where('permission', 2)->get();
+    $courses = Course::where('teacher', '')->orWhereNull('teacher')->get();
 
-    return view('admin/adminTeachers', compact('users'));
+    return view('admin/adminTeachers', compact('users','courses'));
 });
+
+//Update
+Route::post('admin/adminTeachers', [UserController::class, "update"])->name("userTeachers.update");
 
 /* Admin Students Routes */
 

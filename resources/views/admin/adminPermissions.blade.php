@@ -131,9 +131,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="d-flex">
-                                                            <button type="submit" class="btn btn-success">
-                                                                Confirm
-                                                            </button>
+                                                            <input type="submit" class="btn btn-success" value="Accept" name="adminPermissionAccept" />
                                                         </div>
                                                     </form>
                                                 </div>
