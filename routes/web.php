@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserController;
 use App\Models\Course;
 use App\Models\User;
@@ -70,6 +71,12 @@ Route::post('admin/adminStudents', [UserController::class, "update"])->name("use
 // Read
 Route::get('admin/adminClasses', function () {
     $courses = Course::all();
+    $users = User::where('permission', 2)->where(function ($query) {
+        $query->where('class', '')->orWhereNull('class');
+    })->get();
 
-    return view('admin/adminClasses', compact('courses'));
+    return view('admin/adminClasses', compact('courses','users'));
 });
+
+//Update
+Route::post('admin/adminClasses', [CourseController::class, "update"])->name("course.update");
