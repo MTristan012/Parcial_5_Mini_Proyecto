@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div>
-            <h1>Teachers</h1>
+            <h1>Students</h1>
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
@@ -16,8 +16,16 @@
                         {{ session('status') }}
                     </div>
                     @endif
+                    @if (session('Correct'))
+                    <div class="alert alert-success">{{ session('Correct') }}</div>
+                    @endif
+                    
+                    @if (session('Incorrect'))
+                    <div class="alert alert-danger">{{ session('Incorrect') }}</div>
+                    @endif
 
-                    <table class="table table-striped table-bordered">
+                    <div class="table-responsive">
+                      <table class="table table-striped table-bordered align-middle">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -29,19 +37,26 @@
                                 <th>Edit</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="table-group-divider">
+                            @php
+                            $x = 1;
+                            @endphp
                             @foreach($users as $user)
                             <tr>
-                                <td>{{$user->id}}</td>
+                                <td>
+                                    @php
+                                    echo $x;
+                                    $x++;
+                                    @endphp
+                                </td>
                                 <td>{{$user->dni}}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->address}}</td>
-                                <td>{{$user->birthday}}</td>
-                                
+                                <td>{{$user->birthday}}</td> 
                                 <td>
                                     <a href="" class="btn btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#modalEdite{{ $user->id }}">
+                                        data-bs-target="#modalEdit{{ $user->id }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path
@@ -59,70 +74,53 @@
                                         </svg>
                                     </a>
                                 </td>
-                                <div class="modal fade" id="modalEdite{{ $user->id }}" tabindex="-1"
+                                <div class="modal fade" id="modalEdit{{ $user->id }}" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edite Permissions &
-                                                    Status</h1>
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit
+                                                    Student: {{$user->name}}</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="" method="POST">
+                                                <form action="{{route('userStudents.update')}}" method="POST">
                                                     @csrf
                                                     <div>
                                                         <div class="mb-3" hidden>
-                                                            <label for="exampleInputEmail1"
-                                                                class="form-label">ID</label>
-                                                            <input name="adminPermissionID" type="email"
-                                                                class="form-control" id="exampleInputEmail1"
-                                                                aria-describedby="emailHelp" value="{{$user->id}}"
-                                                                disabled />
+                                                            <label for="exampleInputEmail1" class="form-label">ID</label>
+                                                            <input name="adminStudentID" type="hidden" class="form-control" id="exampleInputEmail1"
+                                                                aria-describedby="emailHelp" value="{{$user->id}}" readonly />
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="exampleInputEmail1"
-                                                                class="form-label">Email</label>
-                                                            <input name="adminPermissionEmail" type="email"
-                                                                class="form-control" id="exampleInputEmail1"
-                                                                aria-describedby="emailHelp" value="{{$user->email}}"
-                                                                disabled />
+                                                            <label for="InputEmail" class="form-label">DNI</label>
+                                                            <input name="adminStudentDNI" type="text" class="form-control" id="InputDNI" aria-describedby="emailHelp"
+                                                                value="{{$user->dni}}" />
                                                         </div>
-                                                        <div class="my-3">
-                                                            <label for="adminPermissionPermission">Permissions</label>
-                                                            <select name="adminPermissionPermission" class="form-select"
-                                                                aria-label="Default select example">
-                                                                <option @if($user->permission == 0)
-                                                                    selected
-                                                                    @endif>No Role</option>
-                                                                <option @if($user->permission == 1)
-                                                                    selected
-                                                                    @endif>Admin</option>
-                                                                <option @if($user->permission == 2)
-                                                                    selected
-                                                                    @endif>Teacher</option>
-                                                                <option @if($user->permission == 3)
-                                                                    selected
-                                                                    @endif>Student</option>
-                                                            </select>
+                                                        <div class="mb-3">
+                                                            <label for="InputEmail" class="form-label">Email</label>
+                                                            <input name="adminStudentEmail" type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp"
+                                                                value="{{$user->email}}" readonly />
                                                         </div>
-                                                        <div class="my-3">
-                                                            <label for="adminPermissionStatus">Status</label>
-                                                            <div class="form-check form-switch">
-                                                                <input name="adminPermissionStatus"
-                                                                    class="form-check-input" type="checkbox"
-                                                                    role="switch" id="flexSwitchCheckDefault"
-                                                                    @if($user->status == 1)
-                                                                checked
-                                                                @endif>
-                                                                <label class="form-check-label"
-                                                                    for="flexSwitchCheckDefault">Active</label>
-                                                            </div>
+                                                        <div class="mb-3">
+                                                            <label for="InputName" class="form-label">Name</label>
+                                                            <input name="adminStudentName" type="name" class="form-control" id="InputName" aria-describedby="emailHelp"
+                                                                value="{{$user->name}}" />
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="InputAddress" class="form-label">Address</label>
+                                                            <input name="adminStudentAddress" type="text" class="form-control" id="InputAddress"
+                                                                aria-describedby="emailHelp" value="{{$user->address}}" />
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="InputBirthday" class="form-label">Birthday</label>
+                                                            <input name="adminStudentBirthday" type="date" class="form-control" id="InputBirthday"
+                                                                aria-describedby="emailHelp" value="{{$user->birthday}}" />
                                                         </div>
                                                     </div>
                                                     <div class="d-flex">
-                                                        <input type="submit" class="btn btn-success" value="Accept" />
+                                                        <input type="submit" class="btn btn-success" value="Accept" name="adminStudentAccept" />
                                                     </div>
                                                 </form>
                                             </div>
@@ -132,7 +130,8 @@
                             </tr>
                             @endforeach
                         </tbody>
-                    </table>
+                    </table>  
+                    </div>
                 </div>
             </div>
         </div>

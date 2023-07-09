@@ -110,6 +110,39 @@ class UserController extends Controller
             } else {
                 return back()->with("Incorrect", "Error");
             }
+        } else if($request->has('adminStudentAccept')){
+            // Verificar los valores de las variables
+            //dd($request->all());
+
+            try {
+                $query = "UPDATE users SET dni=?, name=?, address=?, birthday=? WHERE id=?";
+                $bindings = [
+                    $request->adminStudentDNI,
+                    $request->adminStudentName,
+                    $request->adminStudentAddress,
+                    $request->adminStudentBirthday,
+                    $request->adminStudentID,
+                ];
+
+                $sql = DB::update($query, $bindings);
+
+                // Verificar el valor de $sql
+                //dd($sql);
+
+                if ($sql == 0) {
+                    $sql = 1;
+                }
+            } catch (\Throwable $th) {
+                // Verificar el error
+                //dd($th);
+                $sql = 0;
+            }
+
+            if ($sql == true) {
+                return back()->with("Correct", "Information Updated");
+            } else {
+                return back()->with("Incorrect", "Error");
+            }
         }
     }
 }
