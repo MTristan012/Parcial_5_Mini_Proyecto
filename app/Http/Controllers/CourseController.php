@@ -16,6 +16,11 @@ class CourseController extends Controller
 
         return view('admin/adminClasses', ["courses" => $courses]);
     }
+    public function create(Request $request)
+    {
+        dd($request->all());
+        return back();
+    }
     public function update(Request $request)
     {
         // Verificar los valores de las variables
@@ -236,8 +241,5 @@ class CourseController extends Controller
                 return back()->with("Incorrect", "Error");
             }
         }
-    }
-    public function create(Request $request)
-    {
     }
 }

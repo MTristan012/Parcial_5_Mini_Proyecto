@@ -4,8 +4,9 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserController;
 use App\Models\Course;
 use App\Models\User;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +42,7 @@ Route::post('admin/adminPermissions', [UserController::class, "update"])->name("
 /* Admin Teachers Routes */
 
 // Create
-//Route::post('admin/adminTeachers', [UserController::class, 'create'])->name('userTeachers.create');
+Route::post('admin/adminTeachers/create', [UserController::class, 'create'])->name('userTeachers.create');
 
 // Read
 Route::get('admin/adminTeachers', function () {
@@ -60,7 +61,7 @@ Route::post('admin/adminTeachers', [UserController::class, "update"])->name("use
 /* Admin Students Routes */
 
 // Create
-//Route::post('admin/adminStudents', [UserController::class, "create"])->name("userStudents.create");
+Route::post('admin/adminStudents/create', [UserController::class, "create"])->name("userStudents.create");
 
 // Read
 Route::get('admin/adminStudents', function () {
@@ -78,7 +79,7 @@ Route::post('admin/adminStudents', [UserController::class, "update"])->name("use
 /* Admin Classes Routes */
 
 // Create
-Route::post('admin/adminClasses', [CourseController::class, 'create'])->name('course.create');
+Route::post('admin/adminClasses/create', [CourseController::class, "create"])->name("course.create");
 
 // Read
 Route::get('admin/adminClasses', function () {

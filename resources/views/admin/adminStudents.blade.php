@@ -26,7 +26,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="" method="POST">
+                                        <form action="{{route('userStudents.create')}}" method="POST">
                                             @csrf
                                             <div>
                                                 <div class="mb-3">
