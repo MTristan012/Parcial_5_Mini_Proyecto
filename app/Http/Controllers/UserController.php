@@ -358,6 +358,31 @@ class UserController extends Controller
             }
         }
     }
+    public function delete(Request $request)
+    {
+        if ($request->has('adminTeacherDelete')) {
+            $teacherId = $request->input('adminTeacherID');
+
+            $teacher = User::find($teacherId);
+            if ($teacher) {
+                $teacher->delete();
+                return back()->with("success", "Teacher deleted successfully");
+            } else {
+                return back()->with("error", "Teacher not found");
+            }
+        } elseif ($request->has('adminStudentDelete')) {
+            $studentId = $request->input('adminStudentID');
+
+            $student = User::find($studentId);
+            if ($student) {
+                $student->delete();
+                return back()->with("success", "Student deleted successfully");
+            } else {
+                return back()->with("error", "Student not found");
+            }
+        }
+    }
+
 }
 
 ?>

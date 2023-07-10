@@ -196,6 +196,33 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="modal fade" id="modalDelete{{ $user->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete
+                                                        Teacher: {{$user->name}}</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{route('userTeachers.delete')}}" method="POST">
+                                                        @csrf
+                                                        <div>
+                                                            <div class="mb-3" hidden>
+                                                                <label for="exampleInputEmail1" class="form-label">ID</label>
+                                                                <input name="adminTeacherID" type="hidden" class="form-control" id="exampleInputEmail1"
+                                                                    aria-describedby="emailHelp" value="{{$user->id}}" readonly />
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex">
+                                                            <input type="submit" class="btn btn-danger" value="Delete" name="adminTeacherDelete" />
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -92,7 +92,7 @@
                                                     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                             </svg>
                                         </a>
-                                        @if($course->class === NULL || $course->class == "")
+                                        @if($course->teacher === NULL || $course->teacher == "")
                                         <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $course->id }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill"
                                                 viewBox="0 0 16 16">
@@ -153,6 +153,33 @@
                                                         <div class="d-flex">
                                                             <input type="submit" class="btn btn-success" value="Accept"
                                                                 name="adminClassAccept" />
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="modalDelete{{ $course->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete
+                                                        Class: {{$course->class}}</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{route('course.delete')}}" method="POST">
+                                                        @csrf
+                                                        <div>
+                                                            <div class="mb-3" hidden>
+                                                                <label for="exampleInputEmail1" class="form-label">ID</label>
+                                                                <input name="adminClassID" type="hidden" class="form-control" id="exampleInputEmail1"
+                                                                    aria-describedby="emailHelp" value="{{$course->id}}" readonly />
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex">
+                                                            <input type="submit" class="btn btn-danger" value="Delete" name="adminClassDelete" />
                                                         </div>
                                                     </form>
                                                 </div>

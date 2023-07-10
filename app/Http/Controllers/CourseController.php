@@ -257,4 +257,16 @@ class CourseController extends Controller
             }
         }
     }
+    public function delete(Request $request)
+    {
+        $courseId = $request->input('adminClassID');
+
+        $course = Course::find($courseId);
+        if ($course) {
+            $course->delete();
+            return back()->with("success", "Course deleted successfully");
+        } else {
+            return back()->with("error", "Course not found");
+        }
+    }
 }

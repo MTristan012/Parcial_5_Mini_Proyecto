@@ -56,7 +56,7 @@ Route::get('admin/adminTeachers', function () {
 Route::post('admin/adminTeachers', [UserController::class, "update"])->name("userTeachers.update");
 
 // Delete
-//Route::post('admin/adminTeachers', [UserController::class, "delete"])->name("userTeachers.delete");
+Route::post('admin/adminTeachers/delete', [UserController::class, "delete"])->name("userTeachers.delete");
 
 /* Admin Students Routes */
 
@@ -74,7 +74,7 @@ Route::get('admin/adminStudents', function () {
 Route::post('admin/adminStudents', [UserController::class, "update"])->name("userStudents.update");
 
 // Delete
-//Route::get('admin/adminStudents', [UserController::class, "delete"])->name("userStudents.delete");
+Route::post('admin/adminStudents/delete', [UserController::class, "delete"])->name("userStudents.delete");
 
 /* Admin Classes Routes */
 
@@ -95,4 +95,4 @@ Route::get('admin/adminClasses', function () {
 Route::post('admin/adminClasses', [CourseController::class, "update"])->name("course.update");
 
 // Delete
-//Route::get('admin/adminClasses', [CourseController::class, "delete"])->name("course.delete");
+Route::post('admin/adminClasses/delete', [CourseController::class, "delete"])->name("course.delete");
