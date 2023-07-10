@@ -18,23 +18,58 @@ class UserController extends Controller
     public function create(Request $request)
     {
         // Verificar los valores de las variables
-        dd($request->all()); 
-        /*
+        //dd($request->all()); 
         if ($request->has('adminNewTeacherAccept')) {
             $user = new User();
             $user->email = $request->input('adminNewTeacherEmail');
             $user->name = $request->input('adminNewTeacherName');
             $user->address = $request->input('adminNewTeacherAddress');
             $user->birthday = $request->input('adminNewTeacherBirthday');
+            $user->password = "teacher1";
+            $user->permission = "2";
 
-            try {
-                $user->save();
-                return back()->with("correcto", "Teacher added successfully");
-            } catch (\Throwable $th) {
-                return back()->with("incorrecto", "Error");
+            if (
+                $user->email !== null && $user->email !== '' &&
+                $user->name !== null && $user->name !== '' &&
+                $user->address !== null && $user->address !== '' &&
+                $user->birthday !== null && $user->birthday !== ''
+            ) {
+                try {
+                    $user->save();
+                    return back()->with("Correct", "Teacher added successfully");
+                } catch (\Throwable $th) {
+                    return back()->with("Incorrect", "Error");
+                }
+            } else {
+                return back()->with("Incorrect", "Please fill in all the required fields");
+            }
+        }else if($request->has('adminNewStudentAccept')){
+            $user = new User();
+            $user->dni = $request->input('adminNewStudentDNI');
+            $user->email = $request->input('adminNewStudentEmail');
+            $user->name = $request->input('adminNewStudentName');
+            $user->address = $request->input('adminNewStudentAddress');
+            $user->birthday = $request->input('adminNewStudentBirthday');
+            $user->password = "student1";
+            $user->permission = "3";
+
+            if (
+                $user->dni !== null && $user->dni !== '' &&
+                $user->email !== null && $user->email !== '' &&
+                $user->name !== null && $user->name !== '' &&
+                $user->address !== null && $user->address !== '' &&
+                $user->birthday !== null && $user->birthday !== ''
+            ) {
+                try {
+                    $user->save();
+                    return back()->with("Correct", "Teacher added successfully");
+                } catch (\Throwable $th) {
+                    return back()->with("Incorrect", "Error");
+                }
+            } else {
+                return back()->with("Incorrect", "Please fill in all the required fields");
             }
         }
-        */
     }
     public function update(Request $request)
     {

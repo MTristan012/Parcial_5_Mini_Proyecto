@@ -18,8 +18,23 @@ class CourseController extends Controller
     }
     public function create(Request $request)
     {
-        dd($request->all());
-        return back();
+        //dd($request->all());
+        $course = new Course();
+        $course->class = $request->input('adminNewClassesClass');
+
+        if (
+            $course->class !== null && $course->class !== ''
+        ) {
+            try {
+                $course->save();
+                return back()->with("Correct", "Class added successfully");
+            } catch (\Throwable $th) {
+                //dd($th);
+                return back()->with("Incorrect", "Error");
+            }
+        } else {
+            return back()->with("Incorrect", "Please fill in all the required fields");
+        }
     }
     public function update(Request $request)
     {
