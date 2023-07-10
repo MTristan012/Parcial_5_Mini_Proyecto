@@ -52,9 +52,9 @@ class CourseController extends Controller
                 return back()->with("Incorrect", "Error");
             }
             //Nuevo Maestro -> Sin Maestro
-            
+
         } else if ($request->adminClassesTeacher != NULL && $request->adminClassesOldTeacher === NULL) {
-            try{
+            try {
                 $teacherInfo = explode(",", $request->adminClassesTeacher);
                 $teacherID = $teacherInfo[0];
                 $teacher = $teacherInfo[1];
@@ -82,7 +82,6 @@ class CourseController extends Controller
                     $sql = 1;
                     $sqlUsers = 1;
                 }
-
             } catch (\Throwable $th) {
                 // Verificar el error
                 //dd($th);
@@ -139,7 +138,7 @@ class CourseController extends Controller
                     return back()->with("Incorrect", "Error");
                 }
             } else {
-                try{
+                try {
                     $oldTeacherInfo = explode(",", $request->adminClassesOldTeacher);
                     $oldTeacherID = $oldTeacherInfo[0];
                     $oldTeacherClass = NULL;

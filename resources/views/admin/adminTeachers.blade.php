@@ -96,6 +96,11 @@
                                                                     aria-describedby="emailHelp" value="{{$user->id}}"
                                                                     readonly />
                                                             </div>
+                                                            <div class="mb-3" hidden>
+                                                                <label for="InputOldClass" class="form-label">ID</label>
+                                                                <input name="adminTeacherOldClass" type="hidden" class="form-control" id="InputOldClass" aria-describedby="emailHelp"
+                                                                    value="{{$user->class}}" readonly />
+                                                            </div>
                                                             <div class="mb-3">
                                                                 <label for="InputEmail" class="form-label">Email</label>
                                                                 <input name="adminTeacherEmail" type="email" class="form-control" id="InputEmail"
