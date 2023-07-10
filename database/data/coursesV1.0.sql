@@ -40,6 +40,7 @@ CREATE TABLE `courses` (
 
 INSERT INTO `courses` (`id`, `class`, `teacherID`, `teacher`) VALUES
 (1, 'English', '', '');
+(2, 'Russian', '', '');
 
 --
 -- Índices para tablas volcadas
