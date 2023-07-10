@@ -108,10 +108,7 @@ Route::post('student/studentClasses/create', [InscriptionController::class, "cre
 // Read
 Route::get('student/studentClasses', function() {
     $courses = Course::whereNotExists(function ($query) {
-        $query->select(DB::raw(1))
-            ->from('Inscriptions')
-            ->whereRaw('Courses.class = Inscriptions.class')
-            ->where('Inscriptions.studentID', Auth::user()->id);
+        $query->select(DB::raw(1))->from('Inscriptions')->whereRaw('Courses.class = Inscriptions.class')->where('Inscriptions.studentID', Auth::user()->id);
     })->get();
 
     $inscriptions = Inscription::where('studentID', Auth::user()->id)->get();
@@ -121,3 +118,15 @@ Route::get('student/studentClasses', function() {
 
 // Delete
 Route::post('student/studentClasses/delete', [InscriptionController::class, "delete"])->name("inscription.delete");
+
+/* Teacher Students Routes */
+
+// Read
+Route::get('teacher/teacherStudents', function () {
+
+    $userIds = DB::table('inscriptions')->where('class', Auth::user()->class)->pluck('studentID');
+
+    $users = User::whereIn('id', $userIds)->get();
+
+    return view('teacher/teacherStudents', compact('users'));
+});

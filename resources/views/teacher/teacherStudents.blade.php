@@ -14,7 +14,40 @@
                     </div>
                     @endif
 
-                    {{ __('Students') }}
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered align-middle">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>DNI</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Birthday</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                    @php
+                                    $x = 1;
+                                    @endphp
+                                    @foreach($users as $user)
+                                <tr>
+                                    <td>
+                                        @php
+                                        echo $x;
+                                        $x++;
+                                        @endphp
+                                    </td>
+                                    <td>{{$user->dni}}</td>
+                                    <td>{{$user->name}}</td>
+                                    <td>{{$user->email}}</td>
+                                    <td>{{$user->address}}</td>
+                                    <td>{{$user->birthday}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
