@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\UserController;
 use App\Models\Course;
 use App\Models\Inscription;
@@ -100,6 +101,11 @@ Route::post('admin/adminClasses', [CourseController::class, "update"])->name("co
 Route::post('admin/adminClasses/delete', [CourseController::class, "delete"])->name("course.delete");
 
 /* Student Classes Routes */
+
+// Create
+Route::post('student/studentClasses/create', [InscriptionController::class, "create"])->name("inscription.create");
+
+// Read
 Route::get('student/studentClasses', function() {
     $courses = Course::whereNotExists(function ($query) {
         $query->select(DB::raw(1))
@@ -108,7 +114,10 @@ Route::get('student/studentClasses', function() {
             ->where('Inscriptions.studentID', Auth::user()->id);
     })->get();
 
-    $inscriptions = Inscription::where('studentID', Auth::user()->id);
+    $inscriptions = Inscription::where('studentID', Auth::user()->id)->get();
 
     return view('student/studentClasses', compact('courses', 'inscriptions'));
 });
+
+// Delete
+Route::post('student/studentClasses/delete', [InscriptionController::class, "delete"])->name("inscription.delete");
