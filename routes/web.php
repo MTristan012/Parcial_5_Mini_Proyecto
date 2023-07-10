@@ -3,8 +3,10 @@
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserController;
 use App\Models\Course;
+use App\Models\Inscription;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 
@@ -96,3 +98,17 @@ Route::post('admin/adminClasses', [CourseController::class, "update"])->name("co
 
 // Delete
 Route::post('admin/adminClasses/delete', [CourseController::class, "delete"])->name("course.delete");
+
+/* Student Classes Routes */
+Route::get('student/studentClasses', function() {
+    $courses = Course::whereNotExists(function ($query) {
+        $query->select(DB::raw(1))
+            ->from('Inscriptions')
+            ->whereRaw('Courses.class = Inscriptions.class')
+            ->where('Inscriptions.studentID', Auth::user()->id);
+    })->get();
+
+    $inscriptions = Inscription::where('studentID', Auth::user()->id);
+
+    return view('student/studentClasses', compact('courses', 'inscriptions'));
+});
