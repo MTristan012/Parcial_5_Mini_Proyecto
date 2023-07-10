@@ -28,20 +28,20 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 /* Admin Permissions Routes */
 
-//Read
+// Read
 Route::get('admin/adminPermissions', function () {
     $users = User::all();
 
     return view('admin/adminPermissions', compact('users'));
 });
 
-//Update
+// Update
 Route::post('admin/adminPermissions', [UserController::class, "update"])->name("userPermissions.update");
 
-//Delete
-//Route::get('/modificar-producto-{id}', [CrudCrontoller::class, "delete"])->name("crud.delete");
-
 /* Admin Teachers Routes */
+
+// Create
+//Route::post('admin/adminTeachers', [UserController::class, 'create'])->name('userTeachers.create');
 
 // Read
 Route::get('admin/adminTeachers', function () {
@@ -51,10 +51,16 @@ Route::get('admin/adminTeachers', function () {
     return view('admin/adminTeachers', compact('users','courses'));
 });
 
-//Update
+// Update
 Route::post('admin/adminTeachers', [UserController::class, "update"])->name("userTeachers.update");
 
+// Delete
+//Route::post('admin/adminTeachers', [UserController::class, "delete"])->name("userTeachers.delete");
+
 /* Admin Students Routes */
+
+// Create
+//Route::post('admin/adminStudents', [UserController::class, "create"])->name("userStudents.create");
 
 // Read
 Route::get('admin/adminStudents', function () {
@@ -63,10 +69,16 @@ Route::get('admin/adminStudents', function () {
     return view('admin/adminStudents', compact('users'));
 });
 
-//Update
+// Update
 Route::post('admin/adminStudents', [UserController::class, "update"])->name("userStudents.update");
 
+// Delete
+//Route::get('admin/adminStudents', [UserController::class, "delete"])->name("userStudents.delete");
+
 /* Admin Classes Routes */
+
+// Create
+Route::post('admin/adminClasses', [CourseController::class, 'create'])->name('course.create');
 
 // Read
 Route::get('admin/adminClasses', function () {
@@ -78,5 +90,8 @@ Route::get('admin/adminClasses', function () {
     return view('admin/adminClasses', compact('courses','users'));
 });
 
-//Update
+// Update
 Route::post('admin/adminClasses', [CourseController::class, "update"])->name("course.update");
+
+// Delete
+//Route::get('admin/adminClasses', [CourseController::class, "delete"])->name("course.delete");

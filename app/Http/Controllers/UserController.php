@@ -302,4 +302,27 @@ class UserController extends Controller
             }
         }
     }
+    public function create(Request $request)
+    {
+        // Verificar los valores de las variables
+        //dd($request->all()); 
+        /*
+        if ($request->has('adminNewTeacherAccept')) {
+            $user = new User();
+            $user->email = $request->input('adminNewTeacherEmail');
+            $user->name = $request->input('adminNewTeacherName');
+            $user->address = $request->input('adminNewTeacherAddress');
+            $user->birthday = $request->input('adminNewTeacherBirthday');
+
+            try {
+                $user->save();
+                return back()->with("correcto", "Teacher added successfully");
+            } catch (\Throwable $th) {
+                return back()->with("incorrecto", "Error");
+            }
+        }
+        */
+    }
 }
+
+?>

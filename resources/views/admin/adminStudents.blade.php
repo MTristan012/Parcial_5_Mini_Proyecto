@@ -8,7 +8,66 @@
         <div>
             <h1>Students</h1>
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Dashboard') }}
+                    <div class="d-flex justify-content-end">
+
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#addStudentModal">
+                            Add Student
+                        </button>
+
+                        <div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModal"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Student's Information</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="" method="POST">
+                                            @csrf
+                                            <div>
+                                                <div class="mb-3">
+                                                    <label for="InputEmail" class="form-label">DNI</label>
+                                                    <input name="adminNewStudentDNI" type="text" class="form-control"
+                                                        id="InputDNI" aria-describedby="emailHelp" />
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="InputEmail" class="form-label">Email</label>
+                                                    <input name="adminNewStudentEmail" type="email" class="form-control"
+                                                        id="InputEmail" aria-describedby="emailHelp" />
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="InputName" class="form-label">Name</label>
+                                                    <input name="adminNewStudentName" type="name" class="form-control"
+                                                        id="InputName" aria-describedby="emailHelp" />
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="InputAddress" class="form-label">Address</label>
+                                                    <input name="adminNewStudentAddress" type="text" class="form-control"
+                                                        id="InputAddress" aria-describedby="emailHelp" />
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="InputBirthday" class="form-label">Birthday</label>
+                                                    <input name="adminNewStudentBirthday" type="date" class="form-control"
+                                                        id="InputBirthday" aria-describedby="emailHelp" />
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer d-flex justify-content-between ">
+                                                <button type="button" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <input type="submit" class="btn btn-success" value="Add Student"
+                                                    name="adminNewStudentAccept" />
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))

@@ -8,8 +8,40 @@
         <div>
             <h1>Classes</h1>
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
+                <div class="card-header">{{ __('Dashboard') }}
+                    <div class="d-flex justify-content-end">
+                    
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addClassModal">
+                            Add Class
+                        </button>
+                    
+                        <div class="modal fade" id="addClassModal" tabindex="-1" aria-labelledby="addClassModal" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Class's Information</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{route('course.create')}}" method="POST">
+                                            @csrf
+                                            <div>
+                                                <div class="mb-3">
+                                                    <label for="InputClass" class="form-label">Class</label>
+                                                    <input name="adminNewClassesClass" type="text" class="form-control" id="InputClass" aria-describedby="emailHelp" />
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer d-flex justify-content-between ">
+                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                <input type="submit" class="btn btn-success" value="Add Class" name="adminNewClassAccept" />
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
@@ -81,7 +113,7 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="" method="POST">
+                                                    <form action="{{route('course.update')}}" method="POST">
                                                         @csrf
                                                         <div>
                                                             <div class="mb-3" hidden>
