@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         $userTeacher->email = "teacher@teacher";
         $userTeacher->password = Hash::make('password');
         $userTeacher->permission = 2;
-        $$userTeacher->status = 1;
+        $userTeacher->status = 1;
         $userTeacher->save();
 
         $userStudent = new User();
