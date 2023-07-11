@@ -80,7 +80,12 @@
                                     </td>
                                     <td>{{$course->class}}</td>
                                     <td>{{$course->teacher}}</td>
-                                    <td></td>
+                                    <td>
+                                        @php
+                                        $count = \App\Models\Inscription::where('class', $course->class)->count();
+                                        echo $count;
+                                        @endphp
+                                    </td>
                                     <td>
                                         <a href="" class="btn btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#modalEdit{{ $course->id }}">
