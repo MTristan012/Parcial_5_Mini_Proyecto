@@ -15,7 +15,9 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
+    @livewireStyles
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    
 </head>
 
 <body>
@@ -165,6 +167,7 @@
             </footer>
         </section>
     </div>
+    @livewireScripts
 </body>
 
 </html>
